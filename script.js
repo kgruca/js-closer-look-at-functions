@@ -52,17 +52,17 @@ const checkIn = function (flightNum, passenger) {
     flightNum = 'LOT9020';
     passenger.name = 'Ms. ' + passenger.name;
 
-    if (passenger.passport = 348974350861246) {
+    if (passenger.passport === 348974350861246) {
         alert('Check in');
     } else {
         alert('Wrong passport!');
     }
 };
 
-checkIn(flight, jane);
-console.log(flight);
-// logs LOT3470
-console.log(jane);
+// checkIn(flight, jane);
+// console.log(flight);
+// // logs LOT3470
+// console.log(jane);
 // logs {name: 'Ms. Jane Nesterenko', passport: 348974350861246}
 /* this demonstrates the difference between primitive-type params and
 object-type params.*/
@@ -76,3 +76,13 @@ heap, both passenger and jane will actually point to the same object in the
 memory heap*/
 // basically, passenger and jane are the same object in the memory heap
 // primitives don't work this way
+
+const newPassport = function(person) {
+    person.passport = Math.floor(Math.random() * 100000000000000000);
+};
+
+newPassport(jane);
+checkIn(flight, jane);
+// alerts 'Wrong passport!'
+// this shows that two different functions are manipulating the same object
+// this can cause issues, especially when a team of devs is working on code
