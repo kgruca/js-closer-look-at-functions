@@ -86,3 +86,25 @@ checkIn(flight, jane);
 // alerts 'Wrong passport!'
 // this shows that two different functions are manipulating the same object
 // this can cause issues, especially when a team of devs is working on code
+
+/* In programming, there are two terms used: passing by value, and passing by 
+reference. In JS there is only passing by value, even though the examples above
+look as if there is passing by reference going on. The distinction is that in 
+JS you pass a reference to a function, but you are not passing by reference*/
+
+
+// NEW SECTION
+// First-class vs Higher-order functions
+/* JS treats functions as first-class citizens - functions are simply values
+and are just another "type" of object*/ 
+// can store functions in variables or properties
+// can pass functions as arguments to other functions
+// can return functions from other functions
+/* b/c functions are objects, they also get their own methods - can call these
+methods on a function */
+
+// this enables programmers to write higher-order functions in JS
+/* = a function that receives another function as an argument, that returns
+a new function, or both*/
+// a func that is passed in as an arg to another func is called a callback func
+// a func returned from another func is called a returned func
