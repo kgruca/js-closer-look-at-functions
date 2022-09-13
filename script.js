@@ -53,9 +53,9 @@ const checkIn = function (flightNum, passenger) {
     passenger.name = 'Ms. ' + passenger.name;
 
     if (passenger.passport === 348974350861246) {
-        alert('Check in');
+        // alert('Check in'); // commenting out to stop the alerts
     } else {
-        alert('Wrong passport!');
+        // alert('Wrong passport!'); // commenting out to stop the alerts
     }
 };
 
@@ -108,3 +108,28 @@ methods on a function */
 a new function, or both*/
 // a func that is passed in as an arg to another func is called a callback func
 // a func returned from another func is called a returned func
+
+
+// NEW SECTION
+// Higher-order functions practice
+const oneWord = function(str) {
+    return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function(str) {
+    const [first, ...others] = str.split(' ');
+    return [first.toUpperCase(), ...others].join(' ');
+};
+// from these two can create a higher-order function
+const transformer = function(str, fn) {
+    console.log(`Original string: ${str}`);
+    console.log(`Transformed string: ${fn(str)}`); 
+    console.log(`Transformed by: ${fn.name}`); // using func built-in property
+};
+
+transformer('JavaScript is the best!', upperFirstWord);
+/* logs Original string: JavaScript is the best! Transformed string: 
+JAVASCRIPT is the best! Transformed by: upperFirstWord */
+transformer('JavaScript is the best!', oneWord);
+/* logs Original string: JavaScript is the best! Transformed string: 
+javascriptisthebest! Transformed by: oneWord*/
