@@ -133,3 +133,13 @@ JAVASCRIPT is the best! Transformed by: upperFirstWord */
 transformer('JavaScript is the best!', oneWord);
 /* logs Original string: JavaScript is the best! Transformed string: 
 javascriptisthebest! Transformed by: oneWord*/
+
+// why does JS use callback functions so often?
+//callback functions allow us to create abstraction
+// abstraction is when you hide the details about a specific part of a program
+/* allows programmers to think about the code on higher, more abstract level.
+oneWord and upperFirstWord could have been coded directly into transformer. 
+Instead, we abstracted this code (created a new level of abstraction) - 
+transform doesn't care how it will modify each string, it just cares that 
+some transformation will take place. transform is basically delegating
+the string transformation to the lower-level functions*/
