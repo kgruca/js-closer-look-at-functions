@@ -169,3 +169,58 @@ const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArrow('How\'s it going')('Leszek');
 // logs How's it going Leszek
+
+
+// NEW SECTION
+// the Call and Apply methods
+
+const lot = {
+    airline: 'Lot',
+    iataCode: 'LO',
+    bookings: [],
+    // book: function () {}
+    // instead, new syntax:
+    book(flightNum, name) {
+        console.log(`${name} booked a seat on ${this.airline} flight 
+        ${this.iataCode}${flightNum}`);
+        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name});
+    },
+};
+
+const eurowings = {
+    airline: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+};
+
+lot.book(5714, 'Elzbieta Braun');
+// logs Elzbieta Braun booked a seat on Lot flight LO5714
+lot.book(5714, 'Leszek Lyszczarz');
+// logs Leszek Lyszczarz booked a seat on Lot flight LO5714
+lot.book(142, 'Grzegorz Ryczkowski');
+// logs Grzegorz Ryczkowski booked a seat on Lot flight LO142
+console.log(lot);
+// logs {airline: 'Lot', iataCode: 'LO', bookings: Array(3), book: ƒ}
+
+// want eurowings to also be able to use the book function from the lot object
+// can do:
+const book = lot.book;
+/* but now, if do something like book(23, 'Barbara Zelaskowska'), this will 
+return a uncaught TypeError: cannot read property 'airline' of undefined. Why?
+because now the book() function is just a regular function call, and in a 
+regular function call, the 'this' keyword points to undefined (at least in 
+strict mode) */
+/* to go about this, we have to tell JS explicitly when we want the this
+keyword to point to the lot object, and when we want it to point to the 
+eurowings object */
+// there are some methods on how to do this: call, apply, and bind
+// so bind(23, 'Barbara Zelaskowska') does NOT work. Instead:
+book.call(eurowings, 23, 'Barbara Zelaskowska');
+// logs Barbara Zelaskowska booked a seat on Eurowings flight EW23
+console.log(eurowings);
+// logs {airline: 'Eurowings', iataCode: 'EW', bookings: Array(1)}
+book.call(lot, 239, 'Aleksandra Ryczkowska');
+// logs Aleksandra Ryczkowska booked a seat on Lot flight LO239
+console.log(lot);
+// logs {airline: 'Lot', iataCode: 'LO', bookings: Array(4), book: ƒ}
+
