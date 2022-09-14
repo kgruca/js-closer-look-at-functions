@@ -288,3 +288,33 @@ document.querySelector('.buy').addEventListener('click', lot.buyPlane.bind(lot))
 /* now, when clicking the button (the first time), we get 451 and that 'this' 
 points to lot */
 
+// partial application revisited
+const addTax = (rate, value) => value + value* rate;
+console.log(addTax(.1, 200));
+// logs 220
+// now, let's say there's one tax rate that's used all the time
+const addVAT = addTax.bind(null, 0.23);
+/* since the first argument in the bind method is what the 'this' keyword is
+supposed to point to and we don't care about the 'this' keyworrd in functions
+like this, we write null for the first argument*/
+// now, the addVat function looks like  addVat = value => value + value * 0.23;
+console.log(addVAT(100));
+// logs 123
+
+/* can be argued that the same can be achieved with default parameters. The 
+difference, however, is that this method is creating a more specialized 
+function from a more general function (kind of like child classes inheriting
+from parent classes and being more specialized) */
+
+/* challenge - create a function that returns a function that does what the 
+addVat function ultimately does */
+
+const addTaxRetFunc = rate => {
+    return function(value) {
+        return value + value * rate;
+    }
+};
+
+const addVatRetFunc = addTaxRetFunc(.23);
+console.log(addVatRetFunc(100));
+// logs 123
