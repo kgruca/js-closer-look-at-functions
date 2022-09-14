@@ -268,3 +268,23 @@ const bookEW23 = book.bind(eurowings, 23);
 // means that a part of the args of the original func are already applied
 bookEW23('Krzysztof Gruca');
 // logs Krzysztof Gruca booked a seat on Eurowings flight EW23
+
+// with event listeners
+lot.planes = 450;
+lot.buyPlane = function() {
+    console.log(this);
+    this.planes++;
+    console.log(this.planes);
+}
+
+// document.querySelector('.buy').addEventListener('click', lot.buyPlane);
+// right now, when clicking the button, the output NaN is returned. Why?
+// b/c 'this' point to the Buy button
+/* IN AN EVENTHANDLER FUNCTION, THE THIS KEYWORD ALWAYS POINTS TO THE ELEMENT
+ON WHICH THE HANDLER IS ATTACHED TO */
+/* therefore, need to use the bind method in the eventhandler, so 'this' 
+points to the lot function (in this case) */
+document.querySelector('.buy').addEventListener('click', lot.buyPlane.bind(lot));
+/* now, when clicking the button (the first time), we get 451 and that 'this' 
+points to lot */
+
