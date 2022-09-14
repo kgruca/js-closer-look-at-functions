@@ -213,8 +213,10 @@ strict mode) */
 /* to go about this, we have to tell JS explicitly when we want the this
 keyword to point to the lot object, and when we want it to point to the 
 eurowings object */
-// there are some methods on how to do this: call, apply, and bind
+// there are some methods on how to do this: CALL, APPLY, and BIND
 // so bind(23, 'Barbara Zelaskowska') does NOT work. Instead:
+
+// the Call method
 book.call(eurowings, 23, 'Barbara Zelaskowska');
 // logs Barbara Zelaskowska booked a seat on Eurowings flight EW23
 console.log(eurowings);
@@ -223,4 +225,22 @@ book.call(lot, 239, 'Aleksandra Ryczkowska');
 // logs Aleksandra Ryczkowska booked a seat on Lot flight LO239
 console.log(lot);
 // logs {airline: 'Lot', iataCode: 'LO', bookings: Array(4), book: ƒ}
+
+/* need to use the same property names for the objects that are being called 
+by the function */
+
+// the Apply method
+/* the difference between the call and apply methods is that apply won't
+receive a list of arguments following the name of the function being 
+passed in, but an array of the arguments instead */
+
+const flightData = [583, 'Justyna Golab-Twarda'];
+// book.apply(lot, flightData);
+// logs Justyna Golab-Twarda booked a seat on Lot flight LO583
+// console.log(lot);
+// logs {airline: 'Lot', iataCode: 'LO', bookings: Array(5), book: ƒ}
+/* the apply method isn't used so often in modern JS, b/c there's a better
+way to do this */
+book.call(lot, ...flightData);
+// logs Justyna Golab-Twarda booked a seat on Lot flight LO583
 
