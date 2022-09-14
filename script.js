@@ -244,3 +244,27 @@ way to do this */
 book.call(lot, ...flightData);
 // logs Justyna Golab-Twarda booked a seat on Lot flight LO583
 
+
+// NEW SECTION
+// the Bind method
+// let's say that we want the eurowings object to always have the bind method
+// using the bind method returns a new function, so can use something like
+const bookEW = book.bind(eurowings);
+bookEW(680, 'Svitlana Masovets');
+// logs Svitlana Masovets booked a seat on Eurowings flight EW680
+
+/* can use the bind method to create a function that won't require
+the object name */
+const bookLO = book.bind(lot);
+bookLO(6739, 'Chris Arnoult');
+// logs Chris Arnoult booked a seat on Lot flight LO6739
+
+// can take this further
+/* can use bind method to create a function for one specific airline and 
+one specific flight number */
+const bookEW23 = book.bind(eurowings, 23);
+// now, it's like the flightNum argument is already set
+// this is called partial application
+// means that a part of the args of the original func are already applied
+bookEW23('Krzysztof Gruca');
+// logs Krzysztof Gruca booked a seat on Eurowings flight EW23
