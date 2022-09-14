@@ -161,3 +161,11 @@ greeterHey('Krzysztof');
 greet('What\'s up')('Mati');
 // logs What's up Mati
 
+/* function s returning functions becomes really helpful when using the
+functional programming paradigm */
+
+// greet function rewritten using arrow notation
+const greetArrow = greeting => name => console.log(`${greeting} ${name}`);
+
+greetArrow('How\'s it going')('Leszek');
+// logs How's it going Leszek
