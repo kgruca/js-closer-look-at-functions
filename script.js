@@ -143,3 +143,21 @@ Instead, we abstracted this code (created a new level of abstraction) -
 transform doesn't care how it will modify each string, it just cares that 
 some transformation will take place. transform is basically delegating
 the string transformation to the lower-level functions*/
+
+
+// NEW SECTION
+// Functions returning functions
+const greet = function(greeting) {
+    return function(name) {
+        console.log(`${greeting} ${name}`);
+    }
+};
+
+const greeterHey = greet('Hey');
+greeterHey('Krzysztof');
+// logs Hey Krzysztof
+
+// can also immediately pass in a function right after another function
+greet('What\'s up')('Mati');
+// logs What's up Mati
+
