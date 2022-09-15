@@ -393,6 +393,7 @@ variable environment somehow continues to live somewhere in the engine */
 // NEW SECTION
 // More examples of situations in which closures will appear
 
+// example 1
 let f;
 
 const g = function() {
@@ -436,4 +437,29 @@ console.dir(f);
 // no longer has the value of a
 
 // so when the func is reassigned a new value, then the old closure disappears
+
+// example 2
+const boardPassengers = function(n, wait) {
+    const perGroup = n / 3;
+
+    // the first argument of setTimeout func is a function
+    // the 2nd arg is the time in milliseconds
+    setTimeout(function() {
+        console.log(`We are now boarding all ${n} passengers`);
+        console.log(`There are 3 groups, each with ${perGroup} passengers`);
+    }, 1000); 
+
+    console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(180, 3);
+// logs Will start boarding in 3 seconds
+// We are now boarding all 180 passengers
+// There are 3 groups, each with 60 passengers
+
+/* in this example, boardPassengers finishes exexuting, then the callback
+function within setTimeout executes after 1 second. This demonstrates a
+closure taking place, since the function still has access to the variables
+defined within the boardPassengers function */
+
 
