@@ -390,3 +390,50 @@ has actually been destroyed b/c its execution context is gone */
 variable environment somehow continues to live somewhere in the engine */
 
 
+// NEW SECTION
+// More examples of situations in which closures will appear
+
+let f;
+
+const g = function() {
+    const a = 23;
+    f = function() {
+        console.log(a * 2);
+    };
+};
+
+const h = function() {
+    const b = 777;
+    f = function() {
+        console.log(b * 2);
+    };
+}
+
+// the following will set a as 23 and call the new f function
+g();
+// the following will log the value of a * 2
+f();
+// logs 46
+console.dir(f);
+// f has the value of a in the closure (scope section)
+
+/* in this example, f is created outside of the g function. B/c it's 
+still assigned a variable in the g function, it's still able to access
+the a variable even after the execution of g() has finished */
+
+// g no longer exists but f closed over that var envt and can access a
+
+// now take it a step further and create a second function h
+// f will also be reassigned within the h func
+
+// this makes the f var be assigned again:
+h();
+f();
+// logs 1554
+// so f now also closed over the var envt of h
+console.dir(f);
+// this shows that f has the value of b in the closure
+// no longer has the value of a
+
+// so when the func is reassigned a new value, then the old closure disappears
+
