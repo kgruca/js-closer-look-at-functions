@@ -340,3 +340,53 @@ parentheses */
 // can create an IIFE arrow function in the same way
 (() => console.log('This function will ALSO never run again'))();
 // If the entire func isn't wrapped between parentheses, then it won't execute
+
+
+// NEW SECTION
+// Closures
+
+// closures are not a features that are explicitly used
+// closures happen automatically in certain situations 
+
+const secureBooking = function() {
+    let passengerCount = 0;
+
+    return function() {
+        passengerCount++;
+        console.log(`${passengerCount} passengers`);
+    };
+};
+
+// booker becomes a func since secureBooking returns a func
+const booker = secureBooking();
+
+booker();
+// logs 1 passengers
+booker();
+// logs 2 passengers
+booker();
+// logs 3 passengers
+
+/* but how does this work? The secureBooking function left the 
+call stack after it was executed the first time, so how does
+booker() still access the passengerCount variable? */
+// a closure makes this possible 
+/* a closure makes a function remember all the variables created
+at the function's birthplace */
+/* any function always has access to the variable environment of the 
+execution context in which the function was created, even AFTER that
+execution context is gone */
+/* Therefore, a closure = variable environment attached to the function,
+exactly as it was at the time and place the function was created */
+
+/* so, the booker function has access to the passengerCount variable
+because it's defined in the exact scope that the booker function was
+created */
+
+/* the scope chain is preserved through the closure, even when the scope
+has actually been destroyed b/c its execution context is gone */
+
+/* even though the execution context has actually been destroyed, the 
+variable environment somehow continues to live somewhere in the engine */
+
+
