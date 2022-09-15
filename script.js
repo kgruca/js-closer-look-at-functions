@@ -318,3 +318,25 @@ const addTaxRetFunc = rate => {
 const addVatRetFunc = addTaxRetFunc(.23);
 console.log(addVatRetFunc(100));
 // logs 123
+
+
+// NEW SECTION
+// Immediately Invoked Function Expressions (IIFE - pronounced iffy)
+/* sometimes a function is needed that will disappear immediately after its run
+once */
+// traditional function:
+const runOnce = function() {
+    console.log('This function will never run again');
+};
+runOnce();
+// instead
+(function() {
+    console.log('This function will never run again');
+})();
+/* trick JS into not providing an error by wrapping this function in 
+parentheses */
+// immediately call it with with parentheses, as well
+
+// can create an IIFE arrow function in the same way
+(() => console.log('This function will ALSO never run again'))();
+// If the entire func isn't wrapped between parentheses, then it won't execute
